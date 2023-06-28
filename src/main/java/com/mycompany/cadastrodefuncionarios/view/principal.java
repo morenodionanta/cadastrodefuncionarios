@@ -828,7 +828,8 @@ public class principal extends javax.swing.JFrame {
         }//GEN-LAST:event_btn_func_novoActionPerformed
 
         private void btn_func_editarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_func_editarActionPerformed
-		// TODO add your handling code here:
+		modoFunc = "Editar";
+		ManipulaInterfaceDep();
         }//GEN-LAST:event_btn_func_editarActionPerformed
 
         private void tbl_fuc_fucsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_fuc_fucsMouseClicked
@@ -840,21 +841,22 @@ public class principal extends javax.swing.JFrame {
         }//GEN-LAST:event_btn_func_excluirActionPerformed
 
         private void btn_func_salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_func_salvarActionPerformed
-		int index = cb_func_deps.getSelectedIndex();
-		if (index == 0) {
-			JOptionPane.showMessageDialog(this, "Você deve selecionar um departamento");
-		} else {
-			Funcionario F = new Funcionario();
-			F.setMatricula(Integer.parseInt(c_func_mat.getText()));
-			F.setNome(c_func_nome.getText());
-			F.setDep(ListaDep.get(index - 1));
-
-			ListaFunc.add(F);
-			ListaDep.get(index - 1).addFunc(F);
+		int cod = Integer.parseInt(c_func_mat.getText());
+		//Testa se foi clicado o botão novo ou editar
+		if (modoFunc.equals("Novo")) {
+			Departamento D = new Departamento(cod, c_dep_nome.getText());
+			ListaDep.add(D);
+		} else if (modoDep.equals("Editar")) {
+			int index = tbl_dep_dpts.getSelectedRow();
+			ListaDep.get(index).setCodigo(cod);
+			ListaDep.get(index).setNome(c_dep_nome.getText());
 		}
-		LoadTableFunc();
-		modoFunc = "Navegar";
-		ManipulaInterfaceFunc();
+
+		LoadTableDep();
+		modoDep = "Navegar";
+		ManipulaInterfaceDep();
+		c_dep_codigo.setText("");
+		c_dep_nome.setText("");
         }//GEN-LAST:event_btn_func_salvarActionPerformed
 
         private void btn_func_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_func_cancelarActionPerformed
