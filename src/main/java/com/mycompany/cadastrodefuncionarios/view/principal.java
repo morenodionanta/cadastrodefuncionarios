@@ -15,6 +15,7 @@ import javax.swing.table.DefaultTableModel;
 public class principal extends javax.swing.JFrame {
 
 	ArrayList<Departamento> ListaDep;
+	String modoDep;
 
 	public void LoadTableDep() {
 		DefaultTableModel modelo = new DefaultTableModel(new Object[]{"Código", "Nome"}, 0);
@@ -30,11 +31,72 @@ public class principal extends javax.swing.JFrame {
 		tbl_dep_dpts.getColumnModel().getColumn(1).setPreferredWidth(200);
 	}
 
+	public void ManipulaInterfaceDep() {
+		switch (modoDep) {
+			case "Navegar":
+				btn_dep_salvar.setEnabled(false);
+				btn_dep_cancelar.setEnabled(false);
+				c_dep_codigo.setEnabled(false);
+				c_dep_nome.setEnabled(false);
+				btn_dep_novo.setEnabled(true);
+				btn_dep_editar.setEnabled(false);
+				btn_dep_excluir.setEnabled(false);
+				break;
+
+			case "Novo":
+				btn_dep_salvar.setEnabled(true);
+				btn_dep_cancelar.setEnabled(true);
+				c_dep_codigo.setEnabled(true);
+				c_dep_nome.setEnabled(true);
+				btn_dep_novo.setEnabled(false);
+				btn_dep_editar.setEnabled(false);
+				btn_dep_excluir.setEnabled(false);
+				break;
+
+			case "Editar":
+				btn_dep_salvar.setEnabled(true);
+				btn_dep_cancelar.setEnabled(true);
+				c_dep_codigo.setEnabled(true);
+				c_dep_nome.setEnabled(true);
+				btn_dep_novo.setEnabled(true);
+				btn_dep_editar.setEnabled(false);
+				btn_dep_excluir.setEnabled(false);
+				break;
+
+			case "Excluir":
+				btn_dep_salvar.setEnabled(false);
+				btn_dep_cancelar.setEnabled(false);
+				c_dep_codigo.setEnabled(false);
+				c_dep_nome.setEnabled(false);
+				btn_dep_novo.setEnabled(true);
+				btn_dep_editar.setEnabled(false);
+				btn_dep_excluir.setEnabled(false);
+				break;
+
+			case "Selecao":
+				btn_dep_salvar.setEnabled(false);
+				btn_dep_cancelar.setEnabled(false);
+				c_dep_codigo.setEnabled(false);
+				c_dep_nome.setEnabled(false);
+				btn_dep_novo.setEnabled(true);
+				btn_dep_editar.setEnabled(true);
+				btn_dep_excluir.setEnabled(true);
+				break;
+			default:
+				System.out.println("Modo inválido");
+		}
+	}
+
 	/**
 	 * Creates new form Principal
 	 */
 	public principal() {
 		initComponents();
+		setLocationRelativeTo(null);
+		ListaDep = new ArrayList();
+		modoDep = "Navegar";
+		ManipulaInterfaceDep();
+
 		setLocationRelativeTo(null);
 		ListaDep = new ArrayList();
 		btn_dep_salvar.setEnabled(false);
@@ -64,8 +126,8 @@ public class principal extends javax.swing.JFrame {
                 c_dep_codigo = new javax.swing.JTextField();
                 c_dep_nome = new javax.swing.JTextField();
                 btn_dep_novo = new javax.swing.JButton();
-                btnEditar = new javax.swing.JButton();
-                btnExcluir = new javax.swing.JButton();
+                btn_dep_editar = new javax.swing.JButton();
+                btn_dep_excluir = new javax.swing.JButton();
                 jPanel2 = new javax.swing.JPanel();
                 jScrollPane1 = new javax.swing.JScrollPane();
                 jTable1 = new javax.swing.JTable();
@@ -184,9 +246,9 @@ public class principal extends javax.swing.JFrame {
                         }
                 });
 
-                btnEditar.setText("Editar");
+                btn_dep_editar.setText("Editar");
 
-                btnExcluir.setText("Excluir");
+                btn_dep_excluir.setText("Excluir");
 
                 javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
                 jPanel1.setLayout(jPanel1Layout);
@@ -197,9 +259,9 @@ public class principal extends javax.swing.JFrame {
                                 .addGap(81, 81, 81)
                                 .addComponent(btn_dep_novo)
                                 .addGap(118, 118, 118)
-                                .addComponent(btnEditar)
+                                .addComponent(btn_dep_editar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 195, Short.MAX_VALUE)
-                                .addComponent(btnExcluir)
+                                .addComponent(btn_dep_excluir)
                                 .addGap(142, 142, 142))
                         .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addContainerGap()
@@ -214,11 +276,11 @@ public class principal extends javax.swing.JFrame {
                                         .addGroup(jPanel1Layout.createSequentialGroup()
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                                        .addComponent(btnEditar)
+                                                        .addComponent(btn_dep_editar)
                                                         .addComponent(btn_dep_novo)))
                                         .addGroup(jPanel1Layout.createSequentialGroup()
                                                 .addGap(18, 18, 18)
-                                                .addComponent(btnExcluir)))
+                                                .addComponent(btn_dep_excluir)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 );
@@ -404,31 +466,35 @@ public class principal extends javax.swing.JFrame {
 
         private void btn_dep_novoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_dep_novoActionPerformed
 		c_dep_codigo.setText("");
-        c_dep_nome.setText("");
-        
-        btn_dep_salvar.setEnabled(true);
-        btn_dep_cancelar.setEnabled(true);
-        c_dep_codigo.setEnabled(true);
-        c_dep_nome.setEnabled(true);
+		c_dep_nome.setText("");
+
+		modoDep = "Novo";
+		ManipulaInterfaceDep();
         }//GEN-LAST:event_btn_dep_novoActionPerformed
 
         private void btn_dep_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_dep_cancelarActionPerformed
-               btn_dep_salvar.setEnabled(false);
-        btn_dep_cancelar.setEnabled(false);
+		c_dep_codigo.setText("");
+		c_dep_nome.setText("");
+		modoDep = "Navegar";
+		ManipulaInterfaceDep();
         }//GEN-LAST:event_btn_dep_cancelarActionPerformed
 
         private void btn_dep_salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_dep_salvarActionPerformed
-               int cod = Integer.parseInt(c_dep_codigo.getText());
-        Departamento D = new Departamento(cod, c_dep_nome.getText());
-        ListaDep.add(D);
-        
-        LoadTableDep();
+		int cod = Integer.parseInt(c_dep_codigo.getText());
+		Departamento D = new Departamento(cod, c_dep_nome.getText());
+		ListaDep.add(D);
+
+		LoadTableDep();
+		modoDep = "Navegar";
+		ManipulaInterfaceDep();
+		c_dep_codigo.setText("");
+		c_dep_nome.setText("");
         }//GEN-LAST:event_btn_dep_salvarActionPerformed
 
-/**
- * @param args the command line arguments
- */
-public static void main(String args[]) {
+	/**
+	 * @param args the command line arguments
+	 */
+	public static void main(String args[]) {
 		/* Set the Nimbus look and feel */
 		//<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
 		/* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -440,27 +506,23 @@ public static void main(String args[]) {
 					javax.swing.UIManager.setLookAndFeel(info.getClassName());
 					break;
 
-}
+				}
 			}
 		} catch (ClassNotFoundException ex) {
-			java.util.logging.Logger.getLogger(principal.class  
+			java.util.logging.Logger.getLogger(principal.class
+				.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+		} catch (InstantiationException ex) {
+			java.util.logging.Logger.getLogger(principal.class
+				.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
-} catch (InstantiationException ex) {
-			java.util.logging.Logger.getLogger(principal.class  
+		} catch (IllegalAccessException ex) {
+			java.util.logging.Logger.getLogger(principal.class
+				.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
-} catch (IllegalAccessException ex) {
-			java.util.logging.Logger.getLogger(principal.class  
-
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
-} catch (javax.swing.UnsupportedLookAndFeelException ex) {
-			java.util.logging.Logger.getLogger(principal.class  
-
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+		} catch (javax.swing.UnsupportedLookAndFeelException ex) {
+			java.util.logging.Logger.getLogger(principal.class
+				.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 		}
 		//</editor-fold>
 		//</editor-fold>
@@ -474,9 +536,9 @@ public static void main(String args[]) {
 	}
 
         // Variables declaration - do not modify//GEN-BEGIN:variables
-        private javax.swing.JButton btnEditar;
-        private javax.swing.JButton btnExcluir;
         private javax.swing.JButton btn_dep_cancelar;
+        private javax.swing.JButton btn_dep_editar;
+        private javax.swing.JButton btn_dep_excluir;
         private javax.swing.JButton btn_dep_novo;
         private javax.swing.JButton btn_dep_salvar;
         private javax.swing.JTextField c_dep_codigo;
