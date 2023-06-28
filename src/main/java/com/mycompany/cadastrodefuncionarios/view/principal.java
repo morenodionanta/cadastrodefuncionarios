@@ -5,7 +5,9 @@
 package com.mycompany.cadastrodefuncionarios.view;
 
 import com.mycompany.cadastrodefuncionarios.Departamento;
+import com.mycompany.cadastrodefuncionarios.Funcionario;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -15,7 +17,17 @@ import javax.swing.table.DefaultTableModel;
 public class principal extends javax.swing.JFrame {
 
 	ArrayList<Departamento> ListaDep;
+	ArrayList<Funcionario> ListaFunc;  // Adicionada a lista de funcionários
 	String modoDep;
+	String modoFunc;                   // Adicionada a variável de modo que muda a configuração
+
+	public void LoadCBDep() {
+		cb_func_deps.removeAllItems();
+		cb_func_deps.addItem("Selecione");
+		for (int i = 0; i < ListaDep.size(); i++) {
+			cb_func_deps.addItem(ListaDep.get(i).getNome());
+		}
+	}
 
 	public void LoadTableDep() {
 		DefaultTableModel modelo = new DefaultTableModel(new Object[]{"Código", "Nome"}, 0);
@@ -29,6 +41,70 @@ public class principal extends javax.swing.JFrame {
 		tbl_dep_dpts.setModel(modelo);
 		tbl_dep_dpts.getColumnModel().getColumn(0).setPreferredWidth(50);
 		tbl_dep_dpts.getColumnModel().getColumn(1).setPreferredWidth(200);
+
+		//Preenche a lista do combo box
+		LoadCBDep();
+	}
+
+	public void ManipulaInterfaceFunc() {
+		switch (modoFunc) {
+			case "Navegar":
+				btn_func_salvar.setEnabled(false);
+				btn_func_cancelar.setEnabled(false);
+				c_func_mat.setEnabled(false);
+				c_func_nome.setEnabled(false);
+				btn_func_novo.setEnabled(true);
+				btn_func_editar.setEnabled(false);
+				btn_func_excluir.setEnabled(false);
+				cb_func_deps.setEnabled(false);
+				break;
+
+			case "Novo":
+				btn_func_salvar.setEnabled(true);
+				btn_func_cancelar.setEnabled(true);
+				c_func_mat.setEnabled(true);
+				c_func_nome.setEnabled(true);
+				cb_func_deps.setEnabled(true);
+				btn_func_novo.setEnabled(false);
+				btn_func_editar.setEnabled(false);
+				btn_func_excluir.setEnabled(false);
+				break;
+
+			case "Editar":
+				btn_func_salvar.setEnabled(true);
+				btn_func_cancelar.setEnabled(true);
+				c_func_mat.setEnabled(true);
+				c_func_nome.setEnabled(true);
+				cb_func_deps.setEnabled(true);
+				btn_func_novo.setEnabled(true);
+				btn_func_editar.setEnabled(false);
+				btn_func_excluir.setEnabled(false);
+				break;
+
+			case "Excluir":
+				btn_func_salvar.setEnabled(false);
+				btn_func_cancelar.setEnabled(false);
+				c_func_mat.setEnabled(false);
+				c_func_nome.setEnabled(false);
+				cb_func_deps.setEnabled(false);
+				btn_func_novo.setEnabled(true);
+				btn_func_editar.setEnabled(false);
+				btn_func_excluir.setEnabled(false);
+				break;
+
+			case "Selecao":
+				btn_func_salvar.setEnabled(false);
+				btn_func_cancelar.setEnabled(false);
+				c_func_mat.setEnabled(false);
+				c_func_nome.setEnabled(false);
+				cb_func_deps.setEnabled(false);
+				btn_func_novo.setEnabled(true);
+				btn_func_editar.setEnabled(true);
+				btn_func_excluir.setEnabled(true);
+				break;
+			default:
+				System.out.println("Modo inválido");
+		}
 	}
 
 	public void ManipulaInterfaceDep() {
@@ -94,15 +170,11 @@ public class principal extends javax.swing.JFrame {
 		initComponents();
 		setLocationRelativeTo(null);
 		ListaDep = new ArrayList();
+		ListaFunc = new ArrayList(); //Adicionada a inicialização da nova lista
 		modoDep = "Navegar";
+		modoFunc = "Navegar";       // Adicionada a configuração inicial
 		ManipulaInterfaceDep();
-		setLocationRelativeTo(null);
-		ListaDep = new ArrayList();
-		btn_dep_salvar.setEnabled(false);
-		btn_dep_cancelar.setEnabled(false);
-		c_dep_codigo.setEnabled(false);
-		c_dep_nome.setEnabled(false);
-
+		ManipulaInterfaceFunc();    // Adicionada a chamada da função que manipula a tela
 	}
 
 	/**
@@ -114,6 +186,18 @@ public class principal extends javax.swing.JFrame {
         // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
         private void initComponents() {
 
+                btn_dep_NOVO = new javax.swing.JButton();
+                btn_dep_EDITAR = new javax.swing.JButton();
+                btn_dep_EXCLUIR = new javax.swing.JButton();
+                jPanel4 = new javax.swing.JPanel();
+                LBLMATRICULA = new javax.swing.JLabel();
+                LBLNOME = new javax.swing.JLabel();
+                c_dep_MATRICULA = new javax.swing.JTextField();
+                c_dep_NOME = new javax.swing.JTextField();
+                btn_dep_SALVAR = new javax.swing.JButton();
+                btn_dep_CANCELAR = new javax.swing.JButton();
+                jComboBox1 = new javax.swing.JComboBox<>();
+                LBLDEP = new javax.swing.JLabel();
                 jTabbedPane1 = new javax.swing.JTabbedPane();
                 jPanel1 = new javax.swing.JPanel();
                 jScrollPane2 = new javax.swing.JScrollPane();
@@ -129,20 +213,117 @@ public class principal extends javax.swing.JFrame {
                 btn_dep_editar = new javax.swing.JButton();
                 btn_dep_excluir = new javax.swing.JButton();
                 jPanel2 = new javax.swing.JPanel();
-                jScrollPane1 = new javax.swing.JScrollPane();
-                jTable1 = new javax.swing.JTable();
-                jPanel4 = new javax.swing.JPanel();
+                btn_func_novo = new javax.swing.JButton();
+                btn_func_editar = new javax.swing.JButton();
+                jScrollPane3 = new javax.swing.JScrollPane();
+                tbl_fuc_fucs = new javax.swing.JTable();
+                btn_func_excluir = new javax.swing.JButton();
+                jPanel5 = new javax.swing.JPanel();
+                lblCodigo1 = new javax.swing.JLabel();
+                lblNome1 = new javax.swing.JLabel();
+                btn_func_salvar = new javax.swing.JButton();
+                btn_func_cancelar = new javax.swing.JButton();
+                c_func_mat = new javax.swing.JTextField();
+                c_func_nome = new javax.swing.JTextField();
+                cb_func_deps = new javax.swing.JComboBox<>();
                 jLabel1 = new javax.swing.JLabel();
-                jLabel2 = new javax.swing.JLabel();
-                edtMatricula = new javax.swing.JTextField();
-                edtNome = new javax.swing.JTextField();
-                jButton4 = new javax.swing.JButton();
-                jButton5 = new javax.swing.JButton();
-                jComboBox1 = new javax.swing.JComboBox<>();
-                jLabel3 = new javax.swing.JLabel();
-                jButton1 = new javax.swing.JButton();
-                jButton2 = new javax.swing.JButton();
-                jButton3 = new javax.swing.JButton();
+
+                btn_dep_NOVO.setText("Novo");
+                btn_dep_NOVO.addActionListener(new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                btn_dep_NOVOActionPerformed(evt);
+                        }
+                });
+
+                btn_dep_EDITAR.setText("Editar");
+                btn_dep_EDITAR.addActionListener(new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                btn_dep_EDITARActionPerformed(evt);
+                        }
+                });
+
+                btn_dep_EXCLUIR.setText("Excluir");
+
+                jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Funcionario", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Trebuchet MS", 3, 12))); // NOI18N
+
+                LBLMATRICULA.setText("Matricula:");
+
+                LBLNOME.setText("Nome:");
+
+                c_dep_NOME.addActionListener(new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                c_dep_NOMEActionPerformed(evt);
+                        }
+                });
+
+                btn_dep_SALVAR.setText("Salvar");
+                btn_dep_SALVAR.addActionListener(new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                btn_dep_SALVARActionPerformed(evt);
+                        }
+                });
+
+                btn_dep_CANCELAR.setText("Cancelar");
+                btn_dep_CANCELAR.addActionListener(new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                btn_dep_CANCELARActionPerformed(evt);
+                        }
+                });
+
+                jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+                LBLDEP.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+                LBLDEP.setText("Dep:");
+
+                javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+                jPanel4.setLayout(jPanel4Layout);
+                jPanel4Layout.setHorizontalGroup(
+                        jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(jPanel4Layout.createSequentialGroup()
+                                                .addGap(126, 126, 126)
+                                                .addComponent(btn_dep_SALVAR)
+                                                .addGap(170, 170, 170)
+                                                .addComponent(btn_dep_CANCELAR))
+                                        .addGroup(jPanel4Layout.createSequentialGroup()
+                                                .addGap(44, 44, 44)
+                                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addGroup(jPanel4Layout.createSequentialGroup()
+                                                                .addComponent(LBLDEP)
+                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                        .addGroup(jPanel4Layout.createSequentialGroup()
+                                                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                                        .addComponent(LBLMATRICULA)
+                                                                        .addComponent(LBLNOME))
+                                                                .addGap(28, 28, 28)
+                                                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                                        .addComponent(c_dep_NOME, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                        .addComponent(c_dep_MATRICULA, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                );
+                jPanel4Layout.setVerticalGroup(
+                        jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGap(23, 23, 23)
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(LBLMATRICULA)
+                                        .addComponent(c_dep_MATRICULA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(LBLNOME)
+                                        .addComponent(c_dep_NOME, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(LBLDEP))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(btn_dep_SALVAR)
+                                        .addComponent(btn_dep_CANCELAR))
+                                .addGap(17, 17, 17))
+                );
 
                 setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -212,6 +393,12 @@ public class principal extends javax.swing.JFrame {
                 btn_dep_cancelar.addActionListener(new java.awt.event.ActionListener() {
                         public void actionPerformed(java.awt.event.ActionEvent evt) {
                                 btn_dep_cancelarActionPerformed(evt);
+                        }
+                });
+
+                c_dep_codigo.addActionListener(new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                c_dep_codigoActionPerformed(evt);
                         }
                 });
 
@@ -294,7 +481,7 @@ public class principal extends javax.swing.JFrame {
                                 .addComponent(btn_dep_novo)
                                 .addGap(118, 118, 118)
                                 .addComponent(btn_dep_editar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 191, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 185, Short.MAX_VALUE)
                                 .addComponent(btn_dep_excluir)
                                 .addGap(142, 142, 142))
                         .addGroup(jPanel1Layout.createSequentialGroup()
@@ -318,7 +505,27 @@ public class principal extends javax.swing.JFrame {
 
                 jTabbedPane1.addTab("Departamento", jPanel1);
 
-                jTable1.setModel(new javax.swing.table.DefaultTableModel(
+                btn_func_novo.setForeground(new java.awt.Color(0, 51, 255));
+                btn_func_novo.setText("Novo");
+                btn_func_novo.addActionListener(new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                btn_func_novoActionPerformed(evt);
+                        }
+                });
+
+                btn_func_editar.setForeground(new java.awt.Color(255, 204, 0));
+                btn_func_editar.setText("Editar");
+                btn_func_editar.addActionListener(new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                btn_func_editarActionPerformed(evt);
+                        }
+                });
+
+                jScrollPane3.setForeground(new java.awt.Color(255, 204, 0));
+
+                tbl_fuc_fucs.setBackground(new java.awt.Color(0, 204, 204));
+                tbl_fuc_fucs.setFont(new java.awt.Font("Trebuchet MS", 3, 14)); // NOI18N
+                tbl_fuc_fucs.setModel(new javax.swing.table.DefaultTableModel(
                         new Object [][] {
                                 {null, null, null},
                                 {null, null, null},
@@ -326,11 +533,11 @@ public class principal extends javax.swing.JFrame {
                                 {null, null, null}
                         },
                         new String [] {
-                                "Matricula", "Nome", "Departamento"
+                                "matricula", "Nome", "Departamento"
                         }
                 ) {
                         Class[] types = new Class [] {
-                                java.lang.Integer.class, java.lang.String.class, java.lang.String.class
+                                java.lang.Integer.class, java.lang.String.class, java.lang.Object.class
                         };
                         boolean[] canEdit = new boolean [] {
                                 false, false, false
@@ -344,122 +551,146 @@ public class principal extends javax.swing.JFrame {
                                 return canEdit [columnIndex];
                         }
                 });
-                jScrollPane1.setViewportView(jTable1);
+                tbl_fuc_fucs.addMouseListener(new java.awt.event.MouseAdapter() {
+                        public void mouseClicked(java.awt.event.MouseEvent evt) {
+                                tbl_fuc_fucsMouseClicked(evt);
+                        }
+                });
+                jScrollPane3.setViewportView(tbl_fuc_fucs);
 
-                jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Funcionario", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Trebuchet MS", 3, 12))); // NOI18N
-
-                jLabel1.setText("Matricula:");
-
-                jLabel2.setText("Nome:");
-
-                edtNome.addActionListener(new java.awt.event.ActionListener() {
+                btn_func_excluir.setForeground(new java.awt.Color(255, 0, 51));
+                btn_func_excluir.setText("Excluir");
+                btn_func_excluir.addActionListener(new java.awt.event.ActionListener() {
                         public void actionPerformed(java.awt.event.ActionEvent evt) {
-                                edtNomeActionPerformed(evt);
+                                btn_func_excluirActionPerformed(evt);
                         }
                 });
 
-                jButton4.setText("Salvar");
-                jButton4.addActionListener(new java.awt.event.ActionListener() {
+                jPanel5.setBackground(new java.awt.Color(0, 102, 102));
+                jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Departamento\n", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Trebuchet MS", 3, 12))); // NOI18N
+                jPanel5.setForeground(new java.awt.Color(0, 102, 102));
+
+                lblCodigo1.setBackground(new java.awt.Color(0, 255, 255));
+                lblCodigo1.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
+                lblCodigo1.setText("matricula:");
+
+                lblNome1.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
+                lblNome1.setText("Nome");
+
+                btn_func_salvar.setText("Salvar");
+                btn_func_salvar.addActionListener(new java.awt.event.ActionListener() {
                         public void actionPerformed(java.awt.event.ActionEvent evt) {
-                                jButton4ActionPerformed(evt);
+                                btn_func_salvarActionPerformed(evt);
                         }
                 });
 
-                jButton5.setText("Cancelar");
+                btn_func_cancelar.setText("Cancelar");
+                btn_func_cancelar.addActionListener(new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                btn_func_cancelarActionPerformed(evt);
+                        }
+                });
 
-                jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+                c_func_mat.addActionListener(new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                c_func_matActionPerformed(evt);
+                        }
+                });
 
-                jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-                jLabel3.setText("Dep:");
+                c_func_nome.addActionListener(new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                c_func_nomeActionPerformed(evt);
+                        }
+                });
 
-                javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-                jPanel4.setLayout(jPanel4Layout);
-                jPanel4Layout.setHorizontalGroup(
-                        jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(jPanel4Layout.createSequentialGroup()
-                                                .addGap(126, 126, 126)
-                                                .addComponent(jButton4)
-                                                .addGap(170, 170, 170)
-                                                .addComponent(jButton5))
-                                        .addGroup(jPanel4Layout.createSequentialGroup()
-                                                .addGap(44, 44, 44)
-                                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addGroup(jPanel4Layout.createSequentialGroup()
-                                                                .addComponent(jLabel3)
-                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                        .addGroup(jPanel4Layout.createSequentialGroup()
-                                                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                                        .addComponent(jLabel1)
-                                                                        .addComponent(jLabel2))
-                                                                .addGap(28, 28, 28)
-                                                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                                        .addComponent(edtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                        .addComponent(edtMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                cb_func_deps.addActionListener(new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                cb_func_depsActionPerformed(evt);
+                        }
+                });
+
+                jLabel1.setText("Dep:");
+
+                javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+                jPanel5.setLayout(jPanel5Layout);
+                jPanel5Layout.setHorizontalGroup(
+                        jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addGap(123, 123, 123)
+                                .addComponent(btn_func_salvar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 237, Short.MAX_VALUE)
+                                .addComponent(btn_func_cancelar)
+                                .addGap(212, 212, 212))
+                        .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(jPanel5Layout.createSequentialGroup()
+                                                .addGap(16, 16, 16)
+                                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(lblNome1)
+                                                        .addComponent(lblCodigo1))
+                                                .addGap(27, 27, 27))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                                                .addContainerGap()
+                                                .addComponent(jLabel1)
+                                                .addGap(18, 18, 18)))
+                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(c_func_nome, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(c_func_mat, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(cb_func_deps, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 );
-                jPanel4Layout.setVerticalGroup(
-                        jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addGap(23, 23, 23)
-                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jLabel1)
-                                        .addComponent(edtMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                jPanel5Layout.setVerticalGroup(
+                        jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addGap(26, 26, 26)
+                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(lblCodigo1)
+                                        .addComponent(c_func_mat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(21, 21, 21)
+                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(lblNome1)
+                                        .addComponent(c_func_nome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(cb_func_deps, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel1))
                                 .addGap(18, 18, 18)
-                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jLabel2)
-                                        .addComponent(edtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
-                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel3))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jButton4)
-                                        .addComponent(jButton5))
-                                .addGap(17, 17, 17))
+                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(btn_func_salvar)
+                                        .addComponent(btn_func_cancelar))
+                                .addGap(24, 24, 24))
                 );
-
-                jButton1.setText("Novo");
-
-                jButton2.setText("Editar");
-
-                jButton3.setText("Excluir");
 
                 javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
                 jPanel2.setLayout(jPanel2Layout);
                 jPanel2Layout.setHorizontalGroup(
                         jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(111, 111, 111)
-                                .addComponent(jButton1)
-                                .addGap(104, 104, 104)
-                                .addComponent(jButton2)
-                                .addGap(106, 106, 106)
-                                .addComponent(jButton3)
-                                .addContainerGap(211, Short.MAX_VALUE))
+                                .addGap(81, 81, 81)
+                                .addComponent(btn_func_novo)
+                                .addGap(118, 118, 118)
+                                .addComponent(btn_func_editar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 185, Short.MAX_VALUE)
+                                .addComponent(btn_func_excluir)
+                                .addGap(142, 142, 142))
                         .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jScrollPane1)
-                                        .addGroup(jPanel2Layout.createSequentialGroup()
-                                                .addContainerGap()
-                                                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addContainerGap()
+                                .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addContainerGap())
                 );
                 jPanel2Layout.setVerticalGroup(
                         jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jButton1)
-                                        .addComponent(jButton2)
-                                        .addComponent(jButton3))
-                                .addGap(38, 38, 38)
-                                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap())
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                .addComponent(btn_func_editar)
+                                                .addComponent(btn_func_novo))
+                                        .addComponent(btn_func_excluir))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 );
 
                 jTabbedPane1.addTab("funcionario", jPanel2);
@@ -468,7 +699,8 @@ public class principal extends javax.swing.JFrame {
                 getContentPane().setLayout(layout);
                 layout.setHorizontalGroup(
                         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
                                 .addComponent(jTabbedPane1)
                                 .addContainerGap())
                 );
@@ -483,13 +715,17 @@ public class principal extends javax.swing.JFrame {
                 pack();
         }// </editor-fold>//GEN-END:initComponents
 
-        private void edtNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edtNomeActionPerformed
+        private void c_dep_NOMEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_c_dep_NOMEActionPerformed
 		// TODO add your handling code here:
-        }//GEN-LAST:event_edtNomeActionPerformed
+        }//GEN-LAST:event_c_dep_NOMEActionPerformed
 
-        private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-		// TODO add your handling code here:
-        }//GEN-LAST:event_jButton4ActionPerformed
+        private void btn_dep_SALVARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_dep_SALVARActionPerformed
+		int cod = Integer.parseInt(c_dep_codigo.getText());
+		Departamento D = new Departamento(cod, c_dep_nome.getText());
+		ListaDep.add(D);
+
+		LoadTableDep();
+        }//GEN-LAST:event_btn_dep_SALVARActionPerformed
 
         private void c_dep_nomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_c_dep_nomeActionPerformed
 		// TODO add your handling code here:
@@ -560,6 +796,86 @@ public class principal extends javax.swing.JFrame {
 		ManipulaInterfaceDep();
         }//GEN-LAST:event_btn_dep_excluirActionPerformed
 
+        private void btn_dep_NOVOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_dep_NOVOActionPerformed
+		c_dep_MATRICULA.setText("");
+		c_dep_NOME.setText("");
+
+		modoDep = "Novo";
+		ManipulaInterfaceDep();
+        }//GEN-LAST:event_btn_dep_NOVOActionPerformed
+
+        private void btn_dep_CANCELARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_dep_CANCELARActionPerformed
+		c_dep_codigo.setText("");
+		c_dep_nome.setText("");
+		modoDep = "Navegar";
+		ManipulaInterfaceDep();
+        }//GEN-LAST:event_btn_dep_CANCELARActionPerformed
+
+        private void btn_dep_EDITARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_dep_EDITARActionPerformed
+		// TODO add your handling code here:
+        }//GEN-LAST:event_btn_dep_EDITARActionPerformed
+
+        private void c_dep_codigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_c_dep_codigoActionPerformed
+		// TODO add your handling code here:
+        }//GEN-LAST:event_c_dep_codigoActionPerformed
+
+        private void btn_func_novoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_func_novoActionPerformed
+		c_func_mat.setText("");
+		c_func_nome.setText("");
+
+		modoFunc = "Novo";
+		ManipulaInterfaceFunc();
+        }//GEN-LAST:event_btn_func_novoActionPerformed
+
+        private void btn_func_editarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_func_editarActionPerformed
+		// TODO add your handling code here:
+        }//GEN-LAST:event_btn_func_editarActionPerformed
+
+        private void tbl_fuc_fucsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_fuc_fucsMouseClicked
+		// TODO add your handling code here:
+        }//GEN-LAST:event_tbl_fuc_fucsMouseClicked
+
+        private void btn_func_excluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_func_excluirActionPerformed
+		// TODO add your handling code here:
+        }//GEN-LAST:event_btn_func_excluirActionPerformed
+
+        private void btn_func_salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_func_salvarActionPerformed
+		int index = cb_func_deps.getSelectedIndex();
+		if (index == 0) {
+			JOptionPane.showMessageDialog(this, "Você deve selecionar um departamento");
+		} else {
+			Funcionario F = new Funcionario();
+			F.setMatricula(Integer.parseInt(c_func_mat.getText()));
+			F.setNome(c_func_nome.getText());
+			F.setDep(ListaDep.get(index - 1));
+
+			ListaFunc.add(F);
+			ListaDep.get(index - 1).addFunc(F);
+		}
+		LoadTableFunc();
+		modoFunc = "Navegar";
+		ManipulaInterfaceFunc();
+        }//GEN-LAST:event_btn_func_salvarActionPerformed
+
+        private void btn_func_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_func_cancelarActionPerformed
+		c_func_mat.setText("");
+		c_func_nome.setText("");
+		modoFunc = "Navegar";
+		ManipulaInterfaceFunc();
+        }//GEN-LAST:event_btn_func_cancelarActionPerformed
+
+        private void c_func_matActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_c_func_matActionPerformed
+		// TODO add your handling code here:
+        }//GEN-LAST:event_c_func_matActionPerformed
+
+        private void c_func_nomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_c_func_nomeActionPerformed
+		// TODO add your handling code here:
+        }//GEN-LAST:event_c_func_nomeActionPerformed
+
+        private void cb_func_depsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_func_depsActionPerformed
+		// TODO add your handling code here:
+        }//GEN-LAST:event_cb_func_depsActionPerformed
+
 	/**
 	 * @param args the command line arguments
 	 */
@@ -606,34 +922,50 @@ public class principal extends javax.swing.JFrame {
 	}
 
         // Variables declaration - do not modify//GEN-BEGIN:variables
+        private javax.swing.JLabel LBLDEP;
+        private javax.swing.JLabel LBLMATRICULA;
+        private javax.swing.JLabel LBLNOME;
+        private javax.swing.JButton btn_dep_CANCELAR;
+        private javax.swing.JButton btn_dep_EDITAR;
+        private javax.swing.JButton btn_dep_EXCLUIR;
+        private javax.swing.JButton btn_dep_NOVO;
+        private javax.swing.JButton btn_dep_SALVAR;
         private javax.swing.JButton btn_dep_cancelar;
         private javax.swing.JButton btn_dep_editar;
         private javax.swing.JButton btn_dep_excluir;
         private javax.swing.JButton btn_dep_novo;
         private javax.swing.JButton btn_dep_salvar;
+        private javax.swing.JButton btn_func_cancelar;
+        private javax.swing.JButton btn_func_editar;
+        private javax.swing.JButton btn_func_excluir;
+        private javax.swing.JButton btn_func_novo;
+        private javax.swing.JButton btn_func_salvar;
+        private javax.swing.JTextField c_dep_MATRICULA;
+        private javax.swing.JTextField c_dep_NOME;
         private javax.swing.JTextField c_dep_codigo;
         private javax.swing.JTextField c_dep_nome;
-        private javax.swing.JTextField edtMatricula;
-        private javax.swing.JTextField edtNome;
-        private javax.swing.JButton jButton1;
-        private javax.swing.JButton jButton2;
-        private javax.swing.JButton jButton3;
-        private javax.swing.JButton jButton4;
-        private javax.swing.JButton jButton5;
+        private javax.swing.JTextField c_func_mat;
+        private javax.swing.JTextField c_func_nome;
+        private javax.swing.JComboBox<String> cb_func_deps;
         private javax.swing.JComboBox<String> jComboBox1;
         private javax.swing.JLabel jLabel1;
-        private javax.swing.JLabel jLabel2;
-        private javax.swing.JLabel jLabel3;
         private javax.swing.JPanel jPanel1;
         private javax.swing.JPanel jPanel2;
         private javax.swing.JPanel jPanel3;
         private javax.swing.JPanel jPanel4;
-        private javax.swing.JScrollPane jScrollPane1;
+        private javax.swing.JPanel jPanel5;
         private javax.swing.JScrollPane jScrollPane2;
+        private javax.swing.JScrollPane jScrollPane3;
         private javax.swing.JTabbedPane jTabbedPane1;
-        private javax.swing.JTable jTable1;
         private javax.swing.JLabel lblCodigo;
+        private javax.swing.JLabel lblCodigo1;
         private javax.swing.JLabel lblNome;
+        private javax.swing.JLabel lblNome1;
         private javax.swing.JTable tbl_dep_dpts;
+        private javax.swing.JTable tbl_fuc_fucs;
         // End of variables declaration//GEN-END:variables
+
+	private void LoadTableFunc() {
+		throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+	}
 }
