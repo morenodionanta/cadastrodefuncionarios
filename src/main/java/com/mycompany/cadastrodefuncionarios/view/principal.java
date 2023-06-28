@@ -146,6 +146,18 @@ public class principal extends javax.swing.JFrame {
 
                 setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+                jTabbedPane1.setBackground(new java.awt.Color(255, 51, 51));
+                jTabbedPane1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED, new java.awt.Color(204, 0, 51), new java.awt.Color(255, 0, 0), new java.awt.Color(255, 0, 0), new java.awt.Color(255, 0, 51)));
+                jTabbedPane1.setForeground(new java.awt.Color(0, 51, 51));
+                jTabbedPane1.setTabLayoutPolicy(javax.swing.JTabbedPane.SCROLL_TAB_LAYOUT);
+                jTabbedPane1.setFont(new java.awt.Font("Trebuchet MS", 3, 14)); // NOI18N
+
+                jPanel1.setBackground(new java.awt.Color(0, 51, 51));
+
+                jScrollPane2.setForeground(new java.awt.Color(255, 204, 0));
+
+                tbl_dep_dpts.setBackground(new java.awt.Color(0, 204, 204));
+                tbl_dep_dpts.setFont(new java.awt.Font("Trebuchet MS", 3, 14)); // NOI18N
                 tbl_dep_dpts.setModel(new javax.swing.table.DefaultTableModel(
                         new Object [][] {
                                 {null, null},
@@ -174,10 +186,15 @@ public class principal extends javax.swing.JFrame {
                 });
                 jScrollPane2.setViewportView(tbl_dep_dpts);
 
+                jPanel3.setBackground(new java.awt.Color(0, 102, 102));
                 jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Departamento\n", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Trebuchet MS", 3, 12))); // NOI18N
+                jPanel3.setForeground(new java.awt.Color(0, 102, 102));
 
+                lblCodigo.setBackground(new java.awt.Color(0, 255, 255));
+                lblCodigo.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
                 lblCodigo.setText("Codigo:");
 
+                lblNome.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
                 lblNome.setText("Nome");
 
                 btn_dep_salvar.setText("Salvar");
@@ -239,6 +256,7 @@ public class principal extends javax.swing.JFrame {
                                 .addGap(24, 24, 24))
                 );
 
+                btn_dep_novo.setForeground(new java.awt.Color(0, 51, 255));
                 btn_dep_novo.setText("Novo");
                 btn_dep_novo.addActionListener(new java.awt.event.ActionListener() {
                         public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -246,8 +264,10 @@ public class principal extends javax.swing.JFrame {
                         }
                 });
 
+                btn_dep_editar.setForeground(new java.awt.Color(255, 204, 0));
                 btn_dep_editar.setText("Editar");
 
+                btn_dep_excluir.setForeground(new java.awt.Color(255, 0, 51));
                 btn_dep_excluir.setText("Excluir");
 
                 javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -260,7 +280,7 @@ public class principal extends javax.swing.JFrame {
                                 .addComponent(btn_dep_novo)
                                 .addGap(118, 118, 118)
                                 .addComponent(btn_dep_editar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 195, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 191, Short.MAX_VALUE)
                                 .addComponent(btn_dep_excluir)
                                 .addGap(142, 142, 142))
                         .addGroup(jPanel1Layout.createSequentialGroup()
@@ -408,7 +428,7 @@ public class principal extends javax.swing.JFrame {
                                 .addComponent(jButton2)
                                 .addGap(106, 106, 106)
                                 .addComponent(jButton3)
-                                .addContainerGap(215, Short.MAX_VALUE))
+                                .addContainerGap(211, Short.MAX_VALUE))
                         .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(jScrollPane1)
