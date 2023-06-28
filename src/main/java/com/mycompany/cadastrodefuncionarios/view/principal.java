@@ -96,13 +96,13 @@ public class principal extends javax.swing.JFrame {
 		ListaDep = new ArrayList();
 		modoDep = "Navegar";
 		ManipulaInterfaceDep();
-
 		setLocationRelativeTo(null);
 		ListaDep = new ArrayList();
 		btn_dep_salvar.setEnabled(false);
 		btn_dep_cancelar.setEnabled(false);
 		c_dep_codigo.setEnabled(false);
 		c_dep_nome.setEnabled(false);
+
 	}
 
 	/**
@@ -146,9 +146,8 @@ public class principal extends javax.swing.JFrame {
 
                 setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-                jTabbedPane1.setBackground(new java.awt.Color(255, 51, 51));
+                jTabbedPane1.setBackground(new java.awt.Color(204, 0, 51));
                 jTabbedPane1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED, new java.awt.Color(204, 0, 51), new java.awt.Color(255, 0, 0), new java.awt.Color(255, 0, 0), new java.awt.Color(255, 0, 51)));
-                jTabbedPane1.setForeground(new java.awt.Color(0, 51, 51));
                 jTabbedPane1.setTabLayoutPolicy(javax.swing.JTabbedPane.SCROLL_TAB_LAYOUT);
                 jTabbedPane1.setFont(new java.awt.Font("Trebuchet MS", 3, 14)); // NOI18N
 
@@ -182,6 +181,11 @@ public class principal extends javax.swing.JFrame {
 
                         public boolean isCellEditable(int rowIndex, int columnIndex) {
                                 return canEdit [columnIndex];
+                        }
+                });
+                tbl_dep_dpts.addMouseListener(new java.awt.event.MouseAdapter() {
+                        public void mouseClicked(java.awt.event.MouseEvent evt) {
+                                tbl_dep_dptsMouseClicked(evt);
                         }
                 });
                 jScrollPane2.setViewportView(tbl_dep_dpts);
@@ -266,9 +270,19 @@ public class principal extends javax.swing.JFrame {
 
                 btn_dep_editar.setForeground(new java.awt.Color(255, 204, 0));
                 btn_dep_editar.setText("Editar");
+                btn_dep_editar.addActionListener(new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                btn_dep_editarActionPerformed(evt);
+                        }
+                });
 
                 btn_dep_excluir.setForeground(new java.awt.Color(255, 0, 51));
                 btn_dep_excluir.setText("Excluir");
+                btn_dep_excluir.addActionListener(new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                btn_dep_excluirActionPerformed(evt);
+                        }
+                });
 
                 javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
                 jPanel1.setLayout(jPanel1Layout);
@@ -292,15 +306,12 @@ public class principal extends javax.swing.JFrame {
                         jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                                        .addComponent(btn_dep_editar)
-                                                        .addComponent(btn_dep_novo)))
-                                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addGap(18, 18, 18)
-                                                .addComponent(btn_dep_excluir)))
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                .addComponent(btn_dep_editar)
+                                                .addComponent(btn_dep_novo))
+                                        .addComponent(btn_dep_excluir))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 );
@@ -501,8 +512,15 @@ public class principal extends javax.swing.JFrame {
 
         private void btn_dep_salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_dep_salvarActionPerformed
 		int cod = Integer.parseInt(c_dep_codigo.getText());
-		Departamento D = new Departamento(cod, c_dep_nome.getText());
-		ListaDep.add(D);
+		//Testa se foi clicado o botão novo ou editar
+		if (modoDep.equals("Novo")) {
+			Departamento D = new Departamento(cod, c_dep_nome.getText());
+			ListaDep.add(D);
+		} else if (modoDep.equals("Editar")) {
+			int index = tbl_dep_dpts.getSelectedRow();
+			ListaDep.get(index).setCodigo(cod);
+			ListaDep.get(index).setNome(c_dep_nome.getText());
+		}
 
 		LoadTableDep();
 		modoDep = "Navegar";
@@ -510,6 +528,37 @@ public class principal extends javax.swing.JFrame {
 		c_dep_codigo.setText("");
 		c_dep_nome.setText("");
         }//GEN-LAST:event_btn_dep_salvarActionPerformed
+
+        private void tbl_dep_dptsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_dep_dptsMouseClicked
+		//Pega a linha selecionada
+		int index = tbl_dep_dpts.getSelectedRow();
+
+		//Testa a validade da linha selecionada
+		if (index >= 0 && index < ListaDep.size()) {
+			//Seleciona a linha e preenche os campos para edição
+			Departamento D = ListaDep.get(index);
+			c_dep_codigo.setText(String.valueOf(D.getCodigo()));
+			c_dep_nome.setText(D.getNome());
+			//Manipula a interface para o modo seleção
+			modoDep = "Selecao";
+			ManipulaInterfaceDep();
+		}
+        }//GEN-LAST:event_tbl_dep_dptsMouseClicked
+
+        private void btn_dep_editarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_dep_editarActionPerformed
+		modoDep = "Editar";
+		ManipulaInterfaceDep();
+        }//GEN-LAST:event_btn_dep_editarActionPerformed
+
+        private void btn_dep_excluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_dep_excluirActionPerformed
+		int index = tbl_dep_dpts.getSelectedRow();
+		if (index >= 0 && index < ListaDep.size()) {
+			ListaDep.remove(index);
+		}
+		LoadTableDep();
+		modoDep = "Navegar";
+		ManipulaInterfaceDep();
+        }//GEN-LAST:event_btn_dep_excluirActionPerformed
 
 	/**
 	 * @param args the command line arguments
@@ -549,6 +598,7 @@ public class principal extends javax.swing.JFrame {
 
 		/* Create and display the form */
 		java.awt.EventQueue.invokeLater(new Runnable() {
+			@Override
 			public void run() {
 				new principal().setVisible(true);
 			}
