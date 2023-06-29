@@ -21,14 +21,6 @@ public class principal extends javax.swing.JFrame {
 	String modoDep;
 	String modoFunc;                   // Adicionada a variável de modo que muda a configuração
 
-	public void LoadCBDep() {
-		cb_func_deps.removeAllItems();
-		cb_func_deps.addItem("Selecione");
-		for (int i = 0; i < ListaDep.size(); i++) {
-			cb_func_deps.addItem(ListaDep.get(i).getNome());
-		}
-	}
-
 	public void LoadTableDep() {
 		DefaultTableModel modelo = new DefaultTableModel(new Object[]{"Código", "Nome"}, 0);
 
@@ -44,6 +36,31 @@ public class principal extends javax.swing.JFrame {
 
 		//Preenche a lista do combo box
 		LoadCBDep();
+	}
+
+	public void LoadTablefunc() {
+		DefaultTableModel modelo = new DefaultTableModel(new Object[]{"Matricula", "Nome", "Matricula"}, 0);
+
+		for (int i = 0; i < ListaDep.size(); i++) {
+			Object linha[] = new Object[]{ListaFunc.get(i).getMatricula(),
+				ListaFunc.get(i).getNome()};
+			modelo.addRow(linha);
+		}
+
+		tbl_Func_Funcs.setModel(modelo);
+		tbl_Func_Funcs.getColumnModel().getColumn(0).setPreferredWidth(50);
+		tbl_Func_Funcs.getColumnModel().getColumn(1).setPreferredWidth(200);
+
+		//Preenche a lista do combo box
+		LoadCBDep();
+	}
+
+	public void LoadCBDep() {
+		cb_func_deps.removeAllItems();
+		cb_func_deps.addItem("Selecione");
+		for (int i = 0; i < ListaDep.size(); i++) {
+			cb_func_deps.addItem(ListaDep.get(i).getNome());
+		}
 	}
 
 	public void ManipulaInterfaceFunc() {
@@ -216,10 +233,10 @@ public class principal extends javax.swing.JFrame {
                 btn_func_novo = new javax.swing.JButton();
                 btn_func_editar = new javax.swing.JButton();
                 jScrollPane3 = new javax.swing.JScrollPane();
-                tbl_fuc_fucs = new javax.swing.JTable();
+                tbl_Func_Funcs = new javax.swing.JTable();
                 btn_func_excluir = new javax.swing.JButton();
                 jPanel5 = new javax.swing.JPanel();
-                lblCodigo1 = new javax.swing.JLabel();
+                lblmatricula = new javax.swing.JLabel();
                 lblNome1 = new javax.swing.JLabel();
                 btn_func_salvar = new javax.swing.JButton();
                 btn_func_cancelar = new javax.swing.JButton();
@@ -440,7 +457,7 @@ public class principal extends javax.swing.JFrame {
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(lblNome)
                                         .addComponent(c_dep_nome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(btn_dep_salvar)
                                         .addComponent(btn_dep_cancelar))
@@ -481,7 +498,7 @@ public class principal extends javax.swing.JFrame {
                                 .addComponent(btn_dep_novo)
                                 .addGap(118, 118, 118)
                                 .addComponent(btn_dep_editar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 185, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 197, Short.MAX_VALUE)
                                 .addComponent(btn_dep_excluir)
                                 .addGap(142, 142, 142))
                         .addGroup(jPanel1Layout.createSequentialGroup()
@@ -523,9 +540,9 @@ public class principal extends javax.swing.JFrame {
 
                 jScrollPane3.setForeground(new java.awt.Color(255, 204, 0));
 
-                tbl_fuc_fucs.setBackground(new java.awt.Color(0, 204, 204));
-                tbl_fuc_fucs.setFont(new java.awt.Font("Trebuchet MS", 3, 14)); // NOI18N
-                tbl_fuc_fucs.setModel(new javax.swing.table.DefaultTableModel(
+                tbl_Func_Funcs.setBackground(new java.awt.Color(0, 204, 204));
+                tbl_Func_Funcs.setFont(new java.awt.Font("Trebuchet MS", 3, 14)); // NOI18N
+                tbl_Func_Funcs.setModel(new javax.swing.table.DefaultTableModel(
                         new Object [][] {
                                 {null, null, null},
                                 {null, null, null},
@@ -551,12 +568,12 @@ public class principal extends javax.swing.JFrame {
                                 return canEdit [columnIndex];
                         }
                 });
-                tbl_fuc_fucs.addMouseListener(new java.awt.event.MouseAdapter() {
+                tbl_Func_Funcs.addMouseListener(new java.awt.event.MouseAdapter() {
                         public void mouseClicked(java.awt.event.MouseEvent evt) {
-                                tbl_fuc_fucsMouseClicked(evt);
+                                tbl_Func_FuncsMouseClicked(evt);
                         }
                 });
-                jScrollPane3.setViewportView(tbl_fuc_fucs);
+                jScrollPane3.setViewportView(tbl_Func_Funcs);
 
                 btn_func_excluir.setForeground(new java.awt.Color(255, 0, 51));
                 btn_func_excluir.setText("Excluir");
@@ -570,9 +587,9 @@ public class principal extends javax.swing.JFrame {
                 jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Departamento\n", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Trebuchet MS", 3, 12))); // NOI18N
                 jPanel5.setForeground(new java.awt.Color(0, 102, 102));
 
-                lblCodigo1.setBackground(new java.awt.Color(0, 255, 255));
-                lblCodigo1.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
-                lblCodigo1.setText("matricula:");
+                lblmatricula.setBackground(new java.awt.Color(0, 255, 255));
+                lblmatricula.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
+                lblmatricula.setText("matricula:");
 
                 lblNome1.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
                 lblNome1.setText("Nome");
@@ -618,7 +635,7 @@ public class principal extends javax.swing.JFrame {
                         .addGroup(jPanel5Layout.createSequentialGroup()
                                 .addGap(123, 123, 123)
                                 .addComponent(btn_func_salvar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 237, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 249, Short.MAX_VALUE)
                                 .addComponent(btn_func_cancelar)
                                 .addGap(212, 212, 212))
                         .addGroup(jPanel5Layout.createSequentialGroup()
@@ -627,7 +644,7 @@ public class principal extends javax.swing.JFrame {
                                                 .addGap(16, 16, 16)
                                                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                         .addComponent(lblNome1)
-                                                        .addComponent(lblCodigo1))
+                                                        .addComponent(lblmatricula))
                                                 .addGap(27, 27, 27))
                                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                                                 .addContainerGap()
@@ -644,13 +661,13 @@ public class principal extends javax.swing.JFrame {
                         .addGroup(jPanel5Layout.createSequentialGroup()
                                 .addGap(26, 26, 26)
                                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(lblCodigo1)
+                                        .addComponent(lblmatricula)
                                         .addComponent(c_func_mat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(21, 21, 21)
                                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(lblNome1)
                                         .addComponent(c_func_nome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(cb_func_deps, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(jLabel1))
@@ -671,7 +688,7 @@ public class principal extends javax.swing.JFrame {
                                 .addComponent(btn_func_novo)
                                 .addGap(118, 118, 118)
                                 .addComponent(btn_func_editar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 185, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 197, Short.MAX_VALUE)
                                 .addComponent(btn_func_excluir)
                                 .addGap(142, 142, 142))
                         .addGroup(jPanel2Layout.createSequentialGroup()
@@ -699,17 +716,11 @@ public class principal extends javax.swing.JFrame {
                 getContentPane().setLayout(layout);
                 layout.setHorizontalGroup(
                         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jTabbedPane1)
-                                .addContainerGap())
+                        .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING)
                 );
                 layout.setVerticalGroup(
                         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jTabbedPane1)
-                                .addContainerGap())
+                        .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING)
                 );
 
                 pack();
@@ -832,31 +843,37 @@ public class principal extends javax.swing.JFrame {
 		ManipulaInterfaceDep();
         }//GEN-LAST:event_btn_func_editarActionPerformed
 
-        private void tbl_fuc_fucsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_fuc_fucsMouseClicked
+        private void tbl_Func_FuncsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_Func_FuncsMouseClicked
 		// TODO add your handling code here:
-        }//GEN-LAST:event_tbl_fuc_fucsMouseClicked
+        }//GEN-LAST:event_tbl_Func_FuncsMouseClicked
 
         private void btn_func_excluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_func_excluirActionPerformed
-		// TODO add your handling code here:
+		int index = tbl_Func_Funcs.getSelectedRow();
+		if (index >= 0 && index < ListaFunc.size()) {
+			ListaFunc.remove(index);
+		}
+		LoadTableDep();
+		modoFunc = "Navegar";
+		ManipulaInterfaceDep();
         }//GEN-LAST:event_btn_func_excluirActionPerformed
 
         private void btn_func_salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_func_salvarActionPerformed
-		int cod = Integer.parseInt(c_func_mat.getText());
-		//Testa se foi clicado o botão novo ou editar
-		if (modoFunc.equals("Novo")) {
-			Departamento D = new Departamento(cod, c_dep_nome.getText());
-			ListaDep.add(D);
-		} else if (modoDep.equals("Editar")) {
-			int index = tbl_dep_dpts.getSelectedRow();
-			ListaDep.get(index).setCodigo(cod);
-			ListaDep.get(index).setNome(c_dep_nome.getText());
-		}
+		int index = cb_func_deps.getSelectedIndex();
+		if (index == 0) {
+			JOptionPane.showMessageDialog(this, "Você deve selecionar um departamento");
+		} else {
+			Funcionario F = new Funcionario();
+			F.setMatricula(Integer.parseInt(c_func_mat.getText()));
+			F.setNome(c_func_nome.getText());
+			F.setDep(ListaDep.get(index - 1));
 
-		LoadTableDep();
-		modoDep = "Navegar";
-		ManipulaInterfaceDep();
-		c_dep_codigo.setText("");
-		c_dep_nome.setText("");
+			ListaFunc.add(F);
+			ListaDep.get(index - 1).addFunc(F);
+		}
+		LoadTableFunc();
+		modoFunc = "Navegar";
+		ManipulaInterfaceFunc();
+
         }//GEN-LAST:event_btn_func_salvarActionPerformed
 
         private void btn_func_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_func_cancelarActionPerformed
@@ -960,11 +977,11 @@ public class principal extends javax.swing.JFrame {
         private javax.swing.JScrollPane jScrollPane3;
         private javax.swing.JTabbedPane jTabbedPane1;
         private javax.swing.JLabel lblCodigo;
-        private javax.swing.JLabel lblCodigo1;
         private javax.swing.JLabel lblNome;
         private javax.swing.JLabel lblNome1;
+        private javax.swing.JLabel lblmatricula;
+        private javax.swing.JTable tbl_Func_Funcs;
         private javax.swing.JTable tbl_dep_dpts;
-        private javax.swing.JTable tbl_fuc_fucs;
         // End of variables declaration//GEN-END:variables
 
 	private void LoadTableFunc() {

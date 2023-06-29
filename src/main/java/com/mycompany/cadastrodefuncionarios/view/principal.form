@@ -179,20 +179,12 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="jTabbedPane1" max="32767" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-          </Group>
+          <Component id="jTabbedPane1" alignment="1" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="jTabbedPane1" max="32767" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-          </Group>
+          <Component id="jTabbedPane1" alignment="1" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -243,7 +235,7 @@
                       <Component id="btn_dep_novo" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="118" max="-2" attributes="0"/>
                       <Component id="btn_dep_editar" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="185" max="32767" attributes="0"/>
+                      <EmptySpace pref="197" max="32767" attributes="0"/>
                       <Component id="btn_dep_excluir" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="142" max="-2" attributes="0"/>
                   </Group>
@@ -378,7 +370,7 @@
                               <Component id="lblNome" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="c_dep_nome" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="55" max="32767" attributes="0"/>
+                          <EmptySpace pref="67" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="btn_dep_salvar" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="btn_dep_cancelar" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -489,7 +481,7 @@
                       <Component id="btn_func_novo" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="118" max="-2" attributes="0"/>
                       <Component id="btn_func_editar" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="185" max="32767" attributes="0"/>
+                      <EmptySpace pref="197" max="32767" attributes="0"/>
                       <Component id="btn_func_excluir" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="142" max="-2" attributes="0"/>
                   </Group>
@@ -553,7 +545,7 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JTable" name="tbl_fuc_fucs">
+                <Component class="javax.swing.JTable" name="tbl_Func_Funcs">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="cc" green="cc" red="0" type="rgb"/>
@@ -592,7 +584,7 @@
                     </Property>
                   </Properties>
                   <Events>
-                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tbl_fuc_fucsMouseClicked"/>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tbl_Func_FuncsMouseClicked"/>
                   </Events>
                 </Component>
               </SubComponents>
@@ -631,7 +623,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="123" max="-2" attributes="0"/>
                           <Component id="btn_func_salvar" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="237" max="32767" attributes="0"/>
+                          <EmptySpace pref="249" max="32767" attributes="0"/>
                           <Component id="btn_func_cancelar" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="212" max="-2" attributes="0"/>
                       </Group>
@@ -641,7 +633,7 @@
                                   <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="lblNome1" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="lblCodigo1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lblmatricula" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                               </Group>
@@ -665,7 +657,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="lblCodigo1" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblmatricula" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="c_func_mat" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
@@ -673,7 +665,7 @@
                               <Component id="lblNome1" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="c_func_nome" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="15" max="32767" attributes="0"/>
+                          <EmptySpace pref="27" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="cb_func_deps" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -689,7 +681,7 @@
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Component class="javax.swing.JLabel" name="lblCodigo1">
+                <Component class="javax.swing.JLabel" name="lblmatricula">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="ff" green="ff" red="0" type="rgb"/>
