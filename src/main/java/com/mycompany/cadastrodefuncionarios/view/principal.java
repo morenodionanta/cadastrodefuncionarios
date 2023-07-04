@@ -244,6 +244,10 @@ public class principal extends javax.swing.JFrame {
                 c_func_nome = new javax.swing.JTextField();
                 cb_func_deps = new javax.swing.JComboBox<>();
                 jLabel1 = new javax.swing.JLabel();
+                jLabel2 = new javax.swing.JLabel();
+                ValidadorCPF = new javax.swing.JFormattedTextField();
+                jLabel3 = new javax.swing.JLabel();
+                jFormattedTextField2 = new javax.swing.JFormattedTextField();
 
                 btn_dep_NOVO.setText("Novo");
                 btn_dep_NOVO.addActionListener(new java.awt.event.ActionListener() {
@@ -349,11 +353,10 @@ public class principal extends javax.swing.JFrame {
                 jTabbedPane1.setTabLayoutPolicy(javax.swing.JTabbedPane.SCROLL_TAB_LAYOUT);
                 jTabbedPane1.setFont(new java.awt.Font("Trebuchet MS", 3, 14)); // NOI18N
 
-                jPanel1.setBackground(new java.awt.Color(0, 51, 51));
+                jPanel1.setBackground(new java.awt.Color(204, 204, 204));
 
                 jScrollPane2.setForeground(new java.awt.Color(255, 204, 0));
 
-                tbl_dep_dpts.setBackground(new java.awt.Color(0, 204, 204));
                 tbl_dep_dpts.setFont(new java.awt.Font("Trebuchet MS", 3, 14)); // NOI18N
                 tbl_dep_dpts.setModel(new javax.swing.table.DefaultTableModel(
                         new Object [][] {
@@ -388,9 +391,9 @@ public class principal extends javax.swing.JFrame {
                 });
                 jScrollPane2.setViewportView(tbl_dep_dpts);
 
-                jPanel3.setBackground(new java.awt.Color(0, 102, 102));
+                jPanel3.setBackground(new java.awt.Color(204, 204, 204));
                 jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Departamento\n", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Trebuchet MS", 3, 12))); // NOI18N
-                jPanel3.setForeground(new java.awt.Color(0, 102, 102));
+                jPanel3.setForeground(new java.awt.Color(255, 51, 51));
 
                 lblCodigo.setBackground(new java.awt.Color(0, 255, 255));
                 lblCodigo.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
@@ -457,7 +460,7 @@ public class principal extends javax.swing.JFrame {
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(lblNome)
                                         .addComponent(c_dep_nome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 159, Short.MAX_VALUE)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(btn_dep_salvar)
                                         .addComponent(btn_dep_cancelar))
@@ -540,7 +543,6 @@ public class principal extends javax.swing.JFrame {
 
                 jScrollPane3.setForeground(new java.awt.Color(255, 204, 0));
 
-                tbl_Func_Funcs.setBackground(new java.awt.Color(0, 204, 204));
                 tbl_Func_Funcs.setFont(new java.awt.Font("Trebuchet MS", 3, 14)); // NOI18N
                 tbl_Func_Funcs.setModel(new javax.swing.table.DefaultTableModel(
                         new Object [][] {
@@ -583,9 +585,9 @@ public class principal extends javax.swing.JFrame {
                         }
                 });
 
-                jPanel5.setBackground(new java.awt.Color(0, 102, 102));
+                jPanel5.setBackground(new java.awt.Color(204, 204, 204));
                 jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Departamento\n", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Trebuchet MS", 3, 12))); // NOI18N
-                jPanel5.setForeground(new java.awt.Color(0, 102, 102));
+                jPanel5.setForeground(new java.awt.Color(255, 51, 51));
 
                 lblmatricula.setBackground(new java.awt.Color(0, 255, 255));
                 lblmatricula.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
@@ -628,6 +630,27 @@ public class principal extends javax.swing.JFrame {
 
                 jLabel1.setText("Dep:");
 
+                jLabel2.setText("CPF");
+
+                try {
+                        ValidadorCPF.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+                } catch (java.text.ParseException ex) {
+                        ex.printStackTrace();
+                }
+                ValidadorCPF.addActionListener(new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                ValidadorCPFActionPerformed(evt);
+                        }
+                });
+
+                jLabel3.setText("TELEFONE");
+
+                try {
+                        jFormattedTextField2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##) 9####-####")));
+                } catch (java.text.ParseException ex) {
+                        ex.printStackTrace();
+                }
+
                 javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
                 jPanel5.setLayout(jPanel5Layout);
                 jPanel5Layout.setHorizontalGroup(
@@ -644,7 +667,9 @@ public class principal extends javax.swing.JFrame {
                                                 .addGap(16, 16, 16)
                                                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                         .addComponent(lblNome1)
-                                                        .addComponent(lblmatricula))
+                                                        .addComponent(lblmatricula)
+                                                        .addComponent(jLabel2)
+                                                        .addComponent(jLabel3))
                                                 .addGap(27, 27, 27))
                                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                                                 .addContainerGap()
@@ -653,7 +678,13 @@ public class principal extends javax.swing.JFrame {
                                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(c_func_nome, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(c_func_mat, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(cb_func_deps, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(cb_func_deps, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(jPanel5Layout.createSequentialGroup()
+                                                .addGap(8, 8, 8)
+                                                .addComponent(ValidadorCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(jPanel5Layout.createSequentialGroup()
+                                                .addGap(19, 19, 19)
+                                                .addComponent(jFormattedTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 );
                 jPanel5Layout.setVerticalGroup(
@@ -667,7 +698,15 @@ public class principal extends javax.swing.JFrame {
                                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(lblNome1)
                                         .addComponent(c_func_nome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                                .addGap(38, 38, 38)
+                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel2)
+                                        .addComponent(ValidadorCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel3)
+                                        .addComponent(jFormattedTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(12, 12, 12)
                                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(cb_func_deps, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(jLabel1))
@@ -720,7 +759,9 @@ public class principal extends javax.swing.JFrame {
                 );
                 layout.setVerticalGroup(
                         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 652, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
                 );
 
                 pack();
@@ -844,7 +885,19 @@ public class principal extends javax.swing.JFrame {
         }//GEN-LAST:event_btn_func_editarActionPerformed
 
         private void tbl_Func_FuncsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_Func_FuncsMouseClicked
-		// TODO add your handling code here:
+		//Pega a linha selecionada
+		int index = tbl_Func_Funcs.getSelectedRow();
+
+		//Testa a validade da linha selecionada
+		if (index >= 0 && index < ListaFunc.size()) {
+			//Seleciona a linha e preenche os campos para edição
+			Funcionario F = ListaFunc.get(index);
+			c_func_mat.setText(String.valueOf(F.getMatricula()));
+			c_func_nome.setText(F.getNome());
+			//Manipula a interface para o modo seleção
+			modoFunc = "Selecao";
+			ManipulaInterfaceDep();
+		}
         }//GEN-LAST:event_tbl_Func_FuncsMouseClicked
 
         private void btn_func_excluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_func_excluirActionPerformed
@@ -895,6 +948,10 @@ public class principal extends javax.swing.JFrame {
 		// TODO add your handling code here:
         }//GEN-LAST:event_cb_func_depsActionPerformed
 
+        private void ValidadorCPFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ValidadorCPFActionPerformed
+                // TODO add your handling code here:
+        }//GEN-LAST:event_ValidadorCPFActionPerformed
+
 	/**
 	 * @param args the command line arguments
 	 */
@@ -944,6 +1001,7 @@ public class principal extends javax.swing.JFrame {
         private javax.swing.JLabel LBLDEP;
         private javax.swing.JLabel LBLMATRICULA;
         private javax.swing.JLabel LBLNOME;
+        private javax.swing.JFormattedTextField ValidadorCPF;
         private javax.swing.JButton btn_dep_CANCELAR;
         private javax.swing.JButton btn_dep_EDITAR;
         private javax.swing.JButton btn_dep_EXCLUIR;
@@ -967,7 +1025,10 @@ public class principal extends javax.swing.JFrame {
         private javax.swing.JTextField c_func_nome;
         private javax.swing.JComboBox<String> cb_func_deps;
         private javax.swing.JComboBox<String> jComboBox1;
+        private javax.swing.JFormattedTextField jFormattedTextField2;
         private javax.swing.JLabel jLabel1;
+        private javax.swing.JLabel jLabel2;
+        private javax.swing.JLabel jLabel3;
         private javax.swing.JPanel jPanel1;
         private javax.swing.JPanel jPanel2;
         private javax.swing.JPanel jPanel3;
